@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { addRecipe } from '../actions';
 import { Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+import validate from '../validate';
 
 class AddRecipe extends Component {
   renderInputField(field) {
@@ -75,22 +76,6 @@ class AddRecipe extends Component {
       </form>
     );
   }
-}
-
-function validate(values) {
-  const errors = {};
-
-  if (!values.title || values.title.length < 3) {
-    errors.title = "Enter a title!";
-  }
-  if (!values.categories) {
-    errors.categories = 'Enter some categories';
-  }
-  if (!values.content) {
-    errors.content = 'Enter some content please';
-  }
-
-  return errors;
 }
 
 export default reduxForm({
