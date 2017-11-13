@@ -1,10 +1,40 @@
 import React, { Component } from "react";
-import { Field, reduxForm } from 'redux-form';
+import { Field, FieldArray, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { addRecipe } from '../actions';
 import { Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import validate from '../validate';
+
+const renderSubFields = (ingredient, index, fields) => (
+    <li key={index}>
+      <button
+        type="button"
+        title="Remove Ingredient"
+        onClick={() => fields.remove(index)}/>
+      <Field
+        name={ingredient}
+        type="text"
+        component={renderField}
+        label={`Ingredient #${index + 1}`}/>
+    </li>
+)
+const renderMembers = ({ fields }) => (
+  <ul>
+    <button type="button" onClick={() => fields.push({})}>Add Ingredient</button>
+    {fields.map(renderSubFields)}
+  </ul>
+)
+
+const renderField = ({input, label, type, meta: {touched, error}}) => (
+  <div>
+    <label>{label}</label>
+    <div>
+      <input {...input} placeholder="Type an ingredient"/>
+      {touched && error && <span>{error}</span>}
+    </div>
+  </div>
+)
 
 class AddRecipe extends Component {
   renderInputField(field) {
@@ -45,8 +75,11 @@ class AddRecipe extends Component {
     );
   }
 
+
+
   onSubmit(recipe) {
     this.props.addRecipe(recipe, () => {
+      console.log(recipe);
       this.props.history.push('/');
     });
   }
@@ -71,8 +104,9 @@ class AddRecipe extends Component {
           name="description"
           component={this.renderTextareaField}
         />
-      <Button type="submit">Submit</Button>
-      <Link to='/'><Button>Cancel</Button></Link>
+        <FieldArray name="ingredients" component={renderMembers} />
+        <Button type="submit">Submit</Button>
+        <Link to='/'><Button>Cancel</Button></Link>
       </form>
     );
   }
