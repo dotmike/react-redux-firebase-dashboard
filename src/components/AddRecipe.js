@@ -6,31 +6,37 @@ import { Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import validate from '../validate';
 
-const renderSubFields = (ingredient, index, fields) => (
-    <li key={index}>
-      <button
-        type="button"
-        title="Remove Ingredient"
-        onClick={() => fields.remove(index)}/>
-      <Field
-        name={ingredient}
-        type="text"
-        component={renderField}
-        label={`Ingredient #${index + 1}`}/>
-    </li>
-)
-const renderMembers = ({ fields }) => (
+const renderMultipleIngredients = ({ fields, meta: { error, submitFailed } }) => (
   <ul>
-    <button type="button" onClick={() => fields.push({})}>Add Ingredient</button>
-    {fields.map(renderSubFields)}
+    <li>
+      <button type="button" onClick={() => fields.push({})}>
+        Add Ingredient
+      </button>
+      {submitFailed && error && <span>{error}</span>}
+    </li>
+    {fields.map((ingredient, index) => (
+      <li key={index}>
+        <Button
+          title="Remove Ingredient"
+          onClick={() => fields.remove(index)}>
+          Remove Ingredient
+        </Button>
+        <Field
+          name={`${index + 1}`}
+          type="text"
+          component={renderIngredientField}
+          label={`Ingredient #${index + 1}`}
+        />
+      </li>
+    ))}
   </ul>
 )
 
-const renderField = ({input, label, type, meta: {touched, error}}) => (
+const renderIngredientField = ({ input, label, type, meta: { touched, error } }) => (
   <div>
     <label>{label}</label>
     <div>
-      <input {...input} placeholder="Type an ingredient"/>
+      <input {...input} type="text" placeholder={label} />
       {touched && error && <span>{error}</span>}
     </div>
   </div>
@@ -75,8 +81,6 @@ class AddRecipe extends Component {
     );
   }
 
-
-
   onSubmit(recipe) {
     this.props.addRecipe(recipe, () => {
       console.log(recipe);
@@ -104,7 +108,7 @@ class AddRecipe extends Component {
           name="description"
           component={this.renderTextareaField}
         />
-        <FieldArray name="ingredients" component={renderMembers} />
+        <FieldArray name="ingredients" component={renderMultipleIngredients}/>
         <Button type="submit">Submit</Button>
         <Link to='/'><Button>Cancel</Button></Link>
       </form>
