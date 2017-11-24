@@ -6,6 +6,7 @@ import RecipeListItem from "./RecipeListItem";
 import { Card, Segment, Dimmer, Loader } from "semantic-ui-react";
 import { withRouter } from 'react-router-dom';
 import Navbar from './Navbar';
+import HomePageBanner from './HomePageBanner'
 
 class RecipeList extends Component {
   componentWillMount() {
@@ -27,6 +28,7 @@ class RecipeList extends Component {
 
     return (
       <div>
+        <HomePageBanner />
         <Navbar activeNav="home"/>
         <div>
           <Card.Group itemsPerRow={3}>

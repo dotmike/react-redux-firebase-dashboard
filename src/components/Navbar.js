@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
 import { Menu, Header, Segment } from "semantic-ui-react";
 import {Link} from 'react-router-dom'
+import HomePageBanner from './HomePageBanner';
 
 class Navbar extends Component {
-  state = { activeItem: "" }
+  constructor(props) {
+
+    super(props);
+
+    state = { activeItem: this.props.activeItem }
+
+  }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
@@ -12,11 +19,6 @@ class Navbar extends Component {
 
     return (
       <div className="navbar-space">
-        <div className="moz-banner">
-          <h1 className="title-header" >
-            Tom and Eric Make Things.
-          </h1>
-        </div>
         <Menu pointing secondary>
           <Menu.Item
             name="home"

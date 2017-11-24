@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { fetchFantasy } from '../actions';
 import _ from 'lodash';
 import { Item, Segment } from 'semantic-ui-react';
+import Navbar from './Navbar';
 
 class FantasyNews extends Component {
   componentWillMount() {
@@ -38,9 +39,9 @@ class FantasyNews extends Component {
   }
 
   render() {
-    console.log(this.props.fantasy);
     return (
       <div>
+        <Navbar activeNav="fantasy"/>
         <Item.Group>
           {this.renderFantasy()}
         </Item.Group>

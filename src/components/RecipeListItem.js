@@ -14,8 +14,8 @@ class RecipeListItem extends Component {
           />
         <Card.Content>
           <Card.Header>{this.props.recipe.title}</Card.Header>
-          <Card.Meta>By Eric</Card.Meta>
-          <Card.Description>This is Eric's attempt at coffee</Card.Description>
+          <Card.Meta>By{this.props.recipe.author}</Card.Meta>
+          <Card.Description>{this.props.recipe.synopsis}</Card.Description>
         </Card.Content>
       </Card>
     );
