@@ -4,12 +4,9 @@ import {Link} from 'react-router-dom'
 import HomePageBanner from './HomePageBanner';
 
 class Navbar extends Component {
-  constructor(props) {
 
-    super(props);
-
-    state = { activeItem: this.props.activeItem }
-
+  componentWillMount() {
+    this.props.setNavbarActiveItem()
   }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
@@ -59,4 +56,10 @@ class Navbar extends Component {
   }
 }
 
-export default Navbar;
+function mapStateToProps(state) {
+  return {
+    activeItem: state.activeItem
+  };
+}
+
+export default connect(mapStateToProps, actions)(Navbar);

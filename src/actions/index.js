@@ -1,6 +1,6 @@
 import * as firebase from "firebase";
 import _ from "lodash";
-import { FETCH_RECIPES, FETCH_RECIPE, FETCH_FANTASY } from "./types";
+import { FETCH_RECIPES, FETCH_RECIPE, FETCH_FANTASY, SET_NAVBAR_ACTIVE_ITEM } from "./types";
 import config from "../../config/firebase";
 import axios from "axios";
 
@@ -57,4 +57,17 @@ export function fetchFantasy() {
       });
     });
   };
+}
+
+export function setNavbarActiveItem(tab) {
+  return dispatch => {
+    let newActiveItem = {
+      activeItem: tab
+    }
+
+    dispatch({
+      type: SET_NAVBAR_ACTIVE_ITEM,
+      payload: newActiveItem
+    })
+  }
 }
