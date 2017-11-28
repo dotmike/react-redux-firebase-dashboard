@@ -1,53 +1,44 @@
 import React, { Component } from 'react';
+import { connect } from "react-redux";
+import * as actions from "../actions";
 import { Menu, Header, Segment } from "semantic-ui-react";
 import {Link} from 'react-router-dom'
 import HomePageBanner from './HomePageBanner';
 
 class Navbar extends Component {
 
-  componentWillMount() {
-    this.props.setNavbarActiveItem()
-  }
-
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name });
-
   render() {
-    const { activeItem } = this.state;
+    let activeNav = this.props.activeNav;
 
     return (
       <div className="navbar-space">
         <Menu pointing secondary>
           <Menu.Item
             name="home"
-            active={activeItem === "home"}
-            onClick={this.handleItemClick}
+            active={activeNav === "home"}
             as={Link}
             to='/'
           />
           <Menu.Item
             name="recipes"
-            active={activeItem === "recipes"}
-            onClick={this.handleItemClick}
+            active={activeNav === "recipes"}
           />
           <Menu.Item
             name="fantasy"
-            active={activeItem === "fantasy"}
-            onClick={this.handleItemClick}
+            active={activeNav === "fantasy"}
             as={Link}
             to='/fantasy'
           />
           <Menu.Item
             name="add a recipe"
-            active={activeItem === "add a recipe"}
-            onClick={this.handleItemClick}
+            active={activeNav === "add a recipe"}
             as={Link}
             to='/new'
           />
           <Menu.Menu position="right">
             <Menu.Item
               name="logout"
-              active={activeItem === "logout"}
-              onClick={this.handleItemClick}
+              active={activeNav === "logout"}
             />
           </Menu.Menu>
         </Menu>
@@ -56,10 +47,4 @@ class Navbar extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    activeItem: state.activeItem
-  };
-}
-
-export default connect(mapStateToProps, actions)(Navbar);
+export default Navbar;
