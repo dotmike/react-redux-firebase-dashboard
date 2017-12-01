@@ -8,8 +8,9 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import reducers from './reducers';
 import RecipeList from './components/RecipeList';
 import AddRecipe from './components/AddRecipe';
-import ShowRecipe from './components/ShowRecipe';
+import RecipeShow from './components/RecipeShow';
 import FantasyNews from './components/FantasyNews';
+import RecipePage from './components/RecipePage';
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 
@@ -21,7 +22,8 @@ ReactDOM.render(
           <Route exact path="/" component={RecipeList} />
           <Route path="/fantasy" component={FantasyNews} />
           <Route path="/new" component={AddRecipe} />
-          <Route path="/recipes/:id" component={ShowRecipe} />
+          <Route path="/recipes" component={RecipePage} />
+          <Route path="/recipes/:id" component={RecipeShow} />
         </Switch>
       </div>
     </BrowserRouter>

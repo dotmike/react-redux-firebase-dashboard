@@ -22,6 +22,8 @@ class Navbar extends Component {
           <Menu.Item
             name="recipes"
             active={activeNav === "recipes"}
+            as={Link}
+            to='/recipes'
           />
           <Menu.Item
             name="fantasy"

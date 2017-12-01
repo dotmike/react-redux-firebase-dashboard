@@ -3,8 +3,9 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchRecipe } from '../actions';
 import { withRouter } from 'react-router-dom';
+import Navbar from './Navbar';
 
-class ShowRecipe extends Component {
+class RecipeShow extends Component {
   componentWillMount() {
     const { id } = this.props.match.params;
     this.props.fetchRecipe(id);
@@ -18,6 +19,7 @@ class ShowRecipe extends Component {
     }
     return(
       <div>
+        <Navbar />
         <h2>{recipe.title}</h2>
         <p>{recipe.description}</p>
       </div>
@@ -31,4 +33,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default withRouter(connect(mapStateToProps, { fetchRecipe })(ShowRecipe));
+export default withRouter(connect(mapStateToProps, { fetchRecipe })(RecipeShow));

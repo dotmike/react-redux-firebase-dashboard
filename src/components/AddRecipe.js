@@ -5,6 +5,7 @@ import { addRecipe } from '../actions';
 import { Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import validate from '../validate';
+import Navbar from './Navbar';
 
 const renderMultipleIngredients = ({ fields, meta: { error, submitFailed } }) => (
   <ul>
@@ -92,26 +93,29 @@ class AddRecipe extends Component {
     const { handleSubmit } = this.props;
 
     return(
-      <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-        <Field
-          label="Title"
-          name="title"
-          component={this.renderInputField}
-        />
-        <Field
-          label="Categories"
-          name="categories"
-          component={this.renderInputField}
-        />
-        <Field
-          label="Description"
-          name="description"
-          component={this.renderTextareaField}
-        />
-        <FieldArray name="ingredients" component={renderMultipleIngredients}/>
-        <Button type="submit">Submit</Button>
-        <Link to='/'><Button>Cancel</Button></Link>
-      </form>
+      <div>
+        <Navbar activeNav='add a recipe' />
+        <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+          <Field
+            label="Title"
+            name="title"
+            component={this.renderInputField}
+          />
+          <Field
+            label="Categories"
+            name="categories"
+            component={this.renderInputField}
+          />
+          <Field
+            label="Description"
+            name="description"
+            component={this.renderTextareaField}
+          />
+          <FieldArray name="ingredients" component={renderMultipleIngredients}/>
+          <Button type="submit">Submit</Button>
+          <Link to='/'><Button>Cancel</Button></Link>
+        </form>
+    </div>
     );
   }
 }
