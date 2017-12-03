@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import * as actions from "../actions";
-import { Menu, Header, Segment } from "semantic-ui-react";
+import { Menu, Header, Segment, Icon } from "semantic-ui-react";
 import {Link} from 'react-router-dom'
 import HomePageBanner from './HomePageBanner';
 
@@ -12,36 +12,51 @@ class Navbar extends Component {
 
     return (
       <div className="navbar-space">
-        <Menu pointing secondary>
+        <Menu secondary size='huge' icon='labeled'>
           <Menu.Item
             name="home"
             active={activeNav === "home"}
             as={Link}
             to='/'
-          />
+          >
+            <Icon name='coffee' size="massive" />
+            Home
+          </ Menu.Item>
           <Menu.Item
             name="recipes"
             active={activeNav === "recipes"}
             as={Link}
             to='/recipes'
-          />
+          >
+            <Icon name='food' size="massive" />
+            Recipes
+          </ Menu.Item>
           <Menu.Item
             name="fantasy"
             active={activeNav === "fantasy"}
             as={Link}
             to='/fantasy'
-          />
-          <Menu.Item
-            name="add a recipe"
-            active={activeNav === "add a recipe"}
-            as={Link}
-            to='/new'
-          />
+          >
+            <Icon name='newspaper' size="massive" />
+            Fantasy News
+          </ Menu.Item>
           <Menu.Menu position="right">
+            <Menu.Item
+              name="add a recipe"
+              active={activeNav === "add a recipe"}
+              as={Link}
+              to='/new'
+            >
+              <Icon name='add' size="massive" />
+              Add A Recipe
+            </ Menu.Item>
             <Menu.Item
               name="logout"
               active={activeNav === "logout"}
-            />
+            >
+              <Icon name='log out' size="massive" />
+              Logout
+            </ Menu.Item>
           </Menu.Menu>
         </Menu>
       </div>
